@@ -8,10 +8,13 @@ use std::collections::VecDeque;
 mod dayone;
 pub use dayone::*;
 
+mod daytwo;
+pub use daytwo::*;
+
 const INF: u32 = u32::MAX;
 
 fn main() {	
-    day_one(2);
+    day_two();
 }
 
 fn arg_parse() -> String {
@@ -23,25 +26,15 @@ fn arg_parse() -> String {
     contents
 }
 
-fn day_one(key: u32) {
+fn day_two() {
     let file_content = arg_parse();
     let mut inputs = file_content.split("\n").collect::<VecDeque<&str>>();
     inputs.pop_back();
-
-    match key {
-        1 => {
-                 let mut part_one = dayone::PartOne { increases: 0,
-					          curr: FromStr::from_str(inputs[0]).unwrap()};
-		 part_one.solve(inputs);
-             }, 
-        2 => {
-                 let mut part_two = dayone::PartTwo {  increases: 0,
-                                                   current_group: VecDeque::new(),
-                                                   prev: INF };
-                 part_two.solve(inputs);
-             },
-	_ => println!("INVALID INPUT")
-    }
+    let mut obj = daytwo::DayTwo{ horizontal_position: 0,
+                                       depth: 0,
+                                       aim: 0          };
+    obj.pilot_part_two(inputs);
+    obj.display();
 }
 
 

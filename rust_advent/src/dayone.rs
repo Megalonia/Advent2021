@@ -1,5 +1,5 @@
 use crate::*;
-// Make  PartOne and PartTwo into one struct
+
 pub struct PartOne {
     pub increases: u32,
     pub curr: u32,
@@ -59,3 +59,27 @@ impl PartTwo {
         self.display_result();
     }
 }
+
+
+fn _day_one(key: u32) {
+    let file_content = arg_parse();
+    let mut inputs = file_content.split("\n").collect::<VecDeque<&str>>();
+    inputs.pop_back();
+
+    match key {
+        1 => {
+                 let mut part_one = dayone::PartOne { increases: 0,
+					          curr: FromStr::from_str(inputs[0]).unwrap()};
+		 part_one.solve(inputs);
+             }, 
+        2 => {
+                 let mut part_two = dayone::PartTwo {  increases: 0,
+                                                   current_group: VecDeque::new(),
+                                                   prev: INF };
+                 part_two.solve(inputs);
+             },
+	_ => println!("INVALID INPUT")
+    }
+}
+
+
