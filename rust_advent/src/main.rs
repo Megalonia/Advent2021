@@ -11,10 +11,21 @@ pub use dayone::*;
 mod daytwo;
 pub use daytwo::*;
 
+mod daythree;
+pub use daythree::*;
+
 const INF: u32 = u32::MAX;
 
 fn main() {	
-    day_two();
+    let file_content = arg_parse();
+    let mut inputs = file_content.split("\n").collect::<VecDeque<&str>>();
+    inputs.pop_back();
+    let mut obj = daythree::BinaryDiagnostic{ gamma_rate   : 0,
+                                              epsilon_rate : 0,
+                                              common_bits  : std::iter::repeat((0,0)).take(inputs[0].len()).collect::<Vec<_>>()
+                                            };
+    obj.power_consumption(inputs);
+
 }
 
 fn arg_parse() -> String {
@@ -25,16 +36,3 @@ fn arg_parse() -> String {
     buffer.read_to_string(&mut contents).unwrap();
     contents
 }
-
-fn day_two() {
-    let file_content = arg_parse();
-    let mut inputs = file_content.split("\n").collect::<VecDeque<&str>>();
-    inputs.pop_back();
-    let mut obj = daytwo::DayTwo{ horizontal_position: 0,
-                                       depth: 0,
-                                       aim: 0          };
-    obj.pilot_part_two(inputs);
-    obj.display();
-}
-
-

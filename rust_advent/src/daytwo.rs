@@ -43,3 +43,16 @@ impl DayTwo {
         }
     }
 }
+
+fn _day_two() {
+    let file_content = arg_parse();
+    let mut inputs = file_content.split("\n").collect::<VecDeque<&str>>();
+    inputs.pop_back();
+    let mut obj = daytwo::DayTwo{ horizontal_position: 0,
+                                       depth: 0,
+                                       aim: 0          };
+    obj.pilot_part_two(inputs);
+    obj.display();
+}
+
+
